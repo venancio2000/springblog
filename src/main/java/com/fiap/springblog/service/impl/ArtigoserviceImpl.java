@@ -16,16 +16,20 @@ public class ArtigoserviceImpl implements ArtigoService {
 
     @Override
     public List<Artigo> obterTodos() {
-        return List.of();
+        return this.artigoRepository.findAll();
     }
 
     @Override
     public Artigo obterPorCodigo(String codigo) {
-        return null;
+        return this.artigoRepository
+                .findById(codigo)
+                .orElseThrow(() -> new IllegalArgumentException("Artigo não existe!"));
     }
 
     @Override
     public Artigo criar(Artigo artigo) {
-        return null;
+        System.out.println("Salvando artigo: " + artigo); // Adicione logs para verificar
+        return this.artigoRepository.save(artigo);
     }
+
 }
