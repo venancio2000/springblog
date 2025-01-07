@@ -16,13 +16,14 @@ public class Artigo {
     @Id
     private String codigo; // Esse campo será o _id no MongoDB
 
-    @DBRef
-    private Autor autor;
     private String titulo;
     private LocalDateTime data;
     private String texto;
     private String url;
     private Integer status;
+
+    @DBRef
+    private Autor autor;
 
 
 }
