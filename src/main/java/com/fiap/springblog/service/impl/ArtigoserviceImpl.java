@@ -6,12 +6,22 @@ import com.fiap.springblog.repository.ArtigoRepository;
 import com.fiap.springblog.repository.AutorRepository;
 import com.fiap.springblog.service.ArtigoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
 public class ArtigoserviceImpl implements ArtigoService {
+
+    private final MongoTemplate mongoTemplate;
+
+    public ArtigoserviceImpl(MongoTemplate mongoTemplate){
+        this.mongoTemplate = mongoTemplate;
+    }
 
     @Autowired
     private ArtigoRepository artigoRepository;
@@ -50,6 +60,12 @@ public class ArtigoserviceImpl implements ArtigoService {
         //System.out.println("Salvando artigo: " + artigo); // Adicione logs para verificar
         //Salvo o artigo com o autor já cadastrado
         return this.artigoRepository.save(artigo);
+    }
+
+    @Override
+    public List<Artigo> findByDataGreateThan(LocalDateTime data) {
+        Query query = new Query(Criteria.where("data").gt(data));
+        return mongoTemplate.find(query, Artigo.class);
     }
 
 }

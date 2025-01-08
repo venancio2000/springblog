@@ -4,7 +4,6 @@ import com.fiap.springblog.model.Artigo;
 import com.fiap.springblog.service.ArtigoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
