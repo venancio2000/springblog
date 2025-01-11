@@ -13,7 +13,8 @@ public interface ArtigoService {
 
     public Artigo criar (Artigo artigo);
 
-    public List<Artigo> findByDataGreateThan(LocalDateTime);
+    public List<Artigo> findByDataGreaterThan(LocalDateTime data);
+
 
 
 

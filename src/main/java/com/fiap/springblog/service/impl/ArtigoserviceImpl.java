@@ -63,7 +63,7 @@ public class ArtigoserviceImpl implements ArtigoService {
     }
 
     @Override
-    public List<Artigo> findByDataGreateThan(LocalDateTime data) {
+    public List<Artigo> findByDataGreaterThan(LocalDateTime data) {
         Query query = new Query(Criteria.where("data").gt(data));
         return mongoTemplate.find(query, Artigo.class);
     }
