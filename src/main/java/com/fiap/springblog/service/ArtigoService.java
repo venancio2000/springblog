@@ -15,6 +15,10 @@ public interface ArtigoService {
 
     public List<Artigo> findByDataGreaterThan(LocalDateTime data);
 
+    public List<Artigo> findByDataAndStatus(LocalDateTime data, Integer status);
+
+    public void atualizar(Artigo updateArtigo);
+
 
 
 

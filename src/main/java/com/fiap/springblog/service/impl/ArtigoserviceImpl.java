@@ -11,6 +11,7 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
+import javax.xml.crypto.Data;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -62,10 +63,28 @@ public class ArtigoserviceImpl implements ArtigoService {
         return this.artigoRepository.save(artigo);
     }
 
+
     @Override
     public List<Artigo> findByDataGreaterThan(LocalDateTime data) {
+        System.out.println("Consultando artigos com data maior que: " + data);
+        // Converte para UTC, se necessário
         Query query = new Query(Criteria.where("data").gt(data));
         return mongoTemplate.find(query, Artigo.class);
     }
+
+    @Override
+    public List<Artigo> findByDataAndStatus(LocalDateTime data, Integer status) {
+        System.out.println("Consultando artigos com data > " + data + " e status = " + status);
+        Query query = new Query(
+                Criteria.where("data").gt(data).and("status").is(status)
+        );
+        return mongoTemplate.find(query, Artigo.class);
+    }
+
+    @Override
+    public void atualizar(Artigo updateArtigo) {
+        this.artigoRepository.save(updateArtigo);
+    }
+
 
 }
